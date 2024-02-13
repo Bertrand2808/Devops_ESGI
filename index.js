@@ -24,6 +24,6 @@ app.get('/visits', (req, res) => {
 });
 
 
-app.lsten(PORT, () => {
+app.listen(PORT, () => {
   console.log(`L'application est disponible sur http://localhost:${PORT}`);
 });
