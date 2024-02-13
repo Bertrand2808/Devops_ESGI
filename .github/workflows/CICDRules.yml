@@ -1,11 +1,11 @@
 name: DockerImage build
 on:
   push:
-    branches: [main]
+    branches: main
     tags:
       - '*'
   pull_request:
-    branches: [main]
+    branches: main
 jobs:
   build_image:
     runs-on: ubuntu-22.04
