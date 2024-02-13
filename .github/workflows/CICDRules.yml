@@ -16,12 +16,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: v20.11.0
-      - name: Launch npm run lint in a container / in a volume
-        run: |
-            docker container run --workdir="$(pwd)" --volume="$(pwd)":"$(pwd)"  "${IMAGE_NAME}" npm run lint
       - name: Build Docker Image
         run: |
           docker image build --tag="${IMAGE_NAME}" ./
+      - name: Launch npm run lint in a container / in a volume
+        run: |
+            docker container run --workdir="$(pwd)" --volume="$(pwd)":"$(pwd)"  "${IMAGE_NAME}" npm run lint
       - name: Run Docker container
         run: |
           docker run -d --name test-container ${IMAGE_NAME} node index.js
