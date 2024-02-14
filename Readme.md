@@ -15,7 +15,7 @@ Ce dépôt contient une application Node.js simple qui affiche une simple page w
 Pour cloner le dépôt, exécutez la commande suivante :
 
 ```bash
-git clone https://github.com/Bertrand2808/ESGIDevops.git
+git clone https://github.com/Bertrand2808/Devops_ESGI.git
 ```
 
 ## Utilisation
@@ -85,7 +85,6 @@ Les étapes du CI sont déjà définies dans le workflow GitHub Actions. Après 
 
 Rendez vous sur le dépôt git, dans l'onglet **Actions** : https://github.com/Bertrand2808/ESGIDevops/actions
 
-
 De là, vous trouverez les différents workflows qui ont été exécutés ou sont en cours d'exécution :
 
 ![1707834946586](image/Readme/1707834946586.png)
@@ -96,14 +95,14 @@ Pour plus de détails vous pourrez développer les onglets et afficher les logs 
 
 ### Steps du CI / CD :
 
- - Build Docker Image
- - Launch npm run lint in a container / in a volume
- - Run Docker container and curl command
- - Remove Docker Container
- - Login to Docker Hub
- - Push Docker Image on hub if push on main branch
- - Push Docker Image on hub if push on tag
- - Create a release on GitHub if push on tag
+- Build Docker Image
+- Launch npm run lint in a container / in a volume
+- Run Docker container and curl command
+- Remove Docker Container
+- Login to Docker Hub
+- Push Docker Image on hub if push on main branch
+- Push Docker Image on hub if push on tag
+- Create a release on GitHub if push on tag
 
 ## Badge
 
@@ -111,8 +110,6 @@ Pour plus de détails vous pourrez développer les onglets et afficher les logs 
 ![Docker Pulls](https://img.shields.io/docker/pulls/bertrand2808/docker-ci)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/Bertrand2808/Devops_ESGI)
 ![Codecov](https://img.shields.io/codecov/c/github/Bertrand2808/Devops_ESGI)
-
-
 
 ## Auteurs
 
