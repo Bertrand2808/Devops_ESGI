@@ -1,7 +1,14 @@
 name: DockerImage build
 on:
-  - push
-  - pull_request
+  push:
+    branches:
+      - main
+      - bre*
+    tags:
+      - v*
+  pull_request:
+    branches:
+      - main
 jobs:
   build_image:
     runs-on: ubuntu-22.04
@@ -23,7 +30,7 @@ jobs:
         run: |
             docker container run --workdir="$(pwd)" --volume="$(pwd)":"$(pwd)"  "${IMAGE_NAME}" npm run lint
         continue-on-error: true
-      - name: Run Docker container
+      - name: Run Docker container and curl command
         run: |
           docker run -d --name test-container ${IMAGE_NAME} node index.js
           sleep 5
@@ -38,13 +45,32 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Push if on `main`
+      - name: Push Docker Image if push on main branch
         uses: docker/build-push-action@v4
         if: github.ref == 'refs/heads/main'
         with:
           push: true
           context: ./
-          tags: bertrand2808/docker-ci:${{ github.ref_name }}
+          tags: bertrand2808/docker-ci:latest
+      - name: Push Docker Image if push on tag
+        uses: docker/build-push-action@v4
+        if: startsWith(github.ref, 'refs/tags/v')
+        with:
+          push: true
+          context: ./
+          tags: bertrand2808/docker-ci:${{ github.ref }}
+      - name: Create a release
+        id: create_release
+        uses: actions/create-release@v1
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Changes in this Release
+          draft: false
+          prerelease: false
 
 
