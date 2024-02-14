@@ -2,6 +2,9 @@ name: DockerImage build
 on:
   - push
   - pull_request
+  create:
+    tags:
+      - '*'
 jobs:
   build_image:
     runs-on: ubuntu-22.04
@@ -38,13 +41,28 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
       - name: Push if on `main`
         uses: docker/build-push-action@v4
         if: github.ref == 'refs/heads/main'
         with:
           push: true
           context: ./
-          tags: bertrand2808/docker-ci:${{ github.ref_name }}
-
-
+          tags: bertrand2808/docker-ci:latest
+      - name: Deploy on tag creation
+        if: github.event_name == 'create' && github.event.ref_type == 'tag'
+        run: |
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+          docker pull bertrand2808/docker-ci:latest
+          docker tag bertrand2808/docker-ci:latest bertrand2808/docker-ci:${{ github.ref }}
+          docker push bertrand2808/docker-ci:${{ github.ref }}
+      - name: Create GitHub release notes
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: Automatic release notes for ${{ github.ref }}
+          draft: false
+          prerelease: false
