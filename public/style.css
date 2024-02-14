@@ -1,12 +1,39 @@
 body {
+  position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
   margin: 0;
+  background-color: #f0f2f5; /* Couleur de fond douce */
+  font-family: 'Arial', sans-serif; /* Police plus moderne */
 }
 
 h1 {
   font-size: 36px;
-  text-align: center;
+  color: #333; /* Couleur de texte plus douce */
+  margin: 20px 0; /* Espacement */
 }
+
+.container {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre douce */
+  padding: 20px;
+  border-radius: 8px; /* Bords arrondis */
+  background-color: #fff; /* Fond blanc pour le contraste */
+}
+
+p {
+  font-size: 24px;
+  color: #555; /* Couleur de texte pour les paragraphes */
+}
+.humour {
+  position: absolute;
+  bottom: 100px; /* Positionné en bas avec une petite marge */
+  width: 100%;
+  text-align: center;
+  font-size: 14px; /* Petite taille de police */
+  color: #666; /* Couleur discrète */
+  font-style: italic; /* Style italique pour l'humour */
+}
+

@@ -14,7 +14,7 @@ jobs:
     permissions: write-all
     runs-on: ubuntu-22.04
     env:
-      IMAGE_NAME: docker-ci-cd:1.0.0
+      IMAGE_NAME: docker-ci:1.0.0
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
@@ -69,7 +69,7 @@ jobs:
           tag_name: ${{ github.ref_name }}
           release_name: Release ${{ github.ref_name }}
           body: |
-            Changes in this Release
+            Changes in this New Release :
           draft: false
           prerelease: false
 
