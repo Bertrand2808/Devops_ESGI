@@ -33,18 +33,22 @@ docker image build --tag=docker-ci:1.0.0 ./
 Vous pouvez utiliser la commande suivante pour exécuter un conteneur à partir de l'image nouvellement créée :
 
 ```bash
-docker containter run -it --name docker-ci -p 3000:3000 docker-ci:1.0.0 node index.js
+docker container run -d --name docker-ci -p 3000:3000 docker-ci:1.0.0 node index.js
 # docker-ci est le nom donné au conteneur à titre d'exemple
 # -p permet de mapper le port 3000 du conteneur sur le port 3000 de la machine hôte
+# -d permet de démarrer le conteneur en arrière-plan
+```
+
+```bash
 # Exemple si vous voulez changer le port de la machine hôte, vous pouvez utiliser :
-docker containter run -it --name test-container -p 8080:8080 -e PORT=8080 docker-ci:1.0.0 node index.js
+docker container run -it --name test-container -p 8080:8080 -e PORT=8080 docker-ci:1.0.0 node index.js
 # dans ce cas, le port 8080 du conteneur sera mappé sur le port 8080 de la machine hôte
 ```
 
 #### Exécution en Read Only dans un volume :
 
 ```bash
-docker containter run -it --name docker-ci -p 3000:3000 --read-only --volume="${PWD}:/app" docker-ci:1.0.0 node index.js
+docker container run -d --name docker-ci -p 3000:3000 --read-only --volume="${PWD}:/app" docker-ci:1.0.0 node index.js
 # --volume permet de monter un volume
 # $(pwd) permet de récupérer le chemin absolu du répertoire courant
 # --read-only permet de monter le volume en lecture seule
@@ -58,9 +62,10 @@ Vous pouvez exécuter la commande suivante pour démarrer un conteneur à partir
 
 ```bash
 # test-container est le nom donné au conteneur à titre d'exemple
-docker containter run -d --name test-container docker-ci:1.0.0 node index.js
+docker container run -d --name test-container docker-ci:1.0.0 node index.js
 # OU
-docker containter run -it --name test-container docker-ci:1.0.0 node index.js
+docker container run -it --name test-container docker-ci:1.0.0 node index.js
+# Attention aux erreurs type : the input device is not a TTY.  If you are using mintty, try prefixing the command with 'winpty'
 ```
 
 Vous pouvez ensuite vérifier si l'application répond correctement en exécutant la commande suivante :
