@@ -10,6 +10,9 @@ Bienvenue dans l'évaluation Devops de l'ESGI.
 
 Ce dépôt contient une application Node.js simple qui affiche une simple page web indiquant le nombre de visite de la page. L'application est fournie avec un Dockerfile qui permet de construire une image Docker contenant l'application.
 
+![alt text](image-1.png)
+
+
 ## Installation
 
 Pour cloner le dépôt, exécutez la commande suivante :
@@ -108,6 +111,15 @@ Pour plus de détails vous pourrez développer les onglets et afficher les logs 
 - Push Docker Image on hub if push on main branch
 - Push Docker Image on hub if push on tag
 - Create a release on GitHub if push on tag
+
+## Destination du Continuous Depoiement :
+
+- [Docker Hub](https://hub.docker.com/repository/docker/bertrand2808/docker-ci/general)
+
+![alt text](image.png)
+
+Sur le Docker Hub, vous pouvez voir les différentes images qui ont été construites et poussées sur le hub. Vous pouvez également voir les différents tags qui ont été créés.
+
 
 ## Badge
 
